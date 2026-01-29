@@ -1,0 +1,581 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>ReflowableWebPreferencesEditor</title>
+<link href="../../../../../../images/logo-icon.svg" rel="icon" type="image/svg"><script>var pathToRoot = "../../../../../../";</script>
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+      if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      } else {
+        const savedDarkMode = JSON.parse(storage)
+        if (savedDarkMode === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      }
+    </script>
+<script type="text/javascript" src="https://unpkg.com/kotlin-playground@1/dist/playground.min.js" async></script>
+<script type="text/javascript" src="../../../../../../scripts/sourceset_dependencies.js" async></script>
+<link href="../../../../../../styles/style.css" rel="Stylesheet">
+<link href="../../../../../../styles/main.css" rel="Stylesheet">
+<link href="../../../../../../styles/prism.css" rel="Stylesheet">
+<link href="../../../../../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../../../../../ui-kit/ui-kit.min.css" rel="Stylesheet">
+<script type="text/javascript" src="../../../../../../scripts/safe-local-storage_blocking.js"></script>
+<script type="text/javascript" src="../../../../../../scripts/navigation-loader.js" async></script>
+<script type="text/javascript" src="../../../../../../scripts/platform-content-handler.js" async></script>
+<script type="text/javascript" src="../../../../../../scripts/main.js" defer></script>
+<script type="text/javascript" src="../../../../../../scripts/prism.js" async></script>
+<script type="text/javascript" src="../../../../../../ui-kit/ui-kit.min.js" defer></script></head>
+<body>
+<div class="root">
+    <header class="navigation theme-dark" id="navigation-wrapper" role="banner">
+<a class="library-name--link" href="../../../../../../index.html" tabindex="1">
+                    Readium
+            </a>        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle" type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">
+        </div>
+        <div class="navigation-controls">
+        <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
+                <button class="platform-tag platform-selector jvm-like" data-active="" aria-pressed="true" data-filter=":readium:navigators:web:readium-navigator-web-reflowable/main">androidJvm</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox" data-role="dropdown-toggle" aria-controls="platform-tags-listbox" aria-haspopup="listbox" aria-expanded="false" aria-label="Toggle source sets"></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox" aria-label="Target filter">
+                    <div class="dropdown--header"><span>Target filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close target filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option jvm-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":readium:navigators:web:readium-navigator-web-reflowable/main" data-filter=":readium:navigators:web:readium-navigator-web-reflowable/main">
+                                <span class="checkbox--icon"></span>
+                                androidJvm
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </ul>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button" type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
+        </div>
+    </header>
+    <div id="container">
+        <nav id="leftColumn" class="sidebar" data-item-type="SECTION" data-item-config="{&quot;defaultSize&quot;: 280, &quot;minSize&quot;: 200, &quot;maxSize&quot;: 400}">
+            <a class="toc--skip-link" href="#main">Skip to content</a>
+            <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list" data-role="dropdown-listbox" aria-label="Table of contents">
+                    <div class="dropdown--header">
+                            <span>
+                                    Readium
+                            </span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar--inner" id="sideMenu"></div>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </nav>
+        <div id="resizer" class="resizer" data-item-type="BAR"></div>
+        <div id="main" data-item-type="SECTION" role="main">
+<div class="main-content" data-page-type="classlike" id="content" pageids="readium-navigator-web-reflowable::org.readium.navigator.web.reflowable.preferences/ReflowableWebPreferencesEditor///PointingToDeclaration//931903066">
+  <div class="breadcrumbs"><a href="../../index.html">readium-navigator-web-reflowable</a><span class="delimiter">/</span><a href="../index.html">org.readium.navigator.web.reflowable.preferences</a><span class="delimiter">/</span><span class="current">ReflowableWebPreferencesEditor</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span>Reflowable</span><wbr><span>Web</span><wbr><span>Preferences</span><wbr><span><span>Editor</span></span></h1>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":readium:navigators:web:readium-navigator-web-reflowable/main"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/compose/runtime/Stable.html"><span class="token annotation builtin">Stable</span></a></div></div><span class="token keyword">class </span><a href="index.html">ReflowableWebPreferencesEditor</a> : <a href="../../../../../../readium/navigators/readium-navigator-common/org.readium.navigator.common/-preferences-editor/index.html">PreferencesEditor</a><span class="token operator">&lt;</span><a href="../-reflowable-web-preferences/index.html">ReflowableWebPreferences</a><span class="token punctuation">, </span><a href="../-reflowable-web-settings/index.html">ReflowableWebSettings</a><span class="token operator">&gt; </span></div><p class="paragraph">Interactive editor of <a href="../-reflowable-web-preferences/index.html">ReflowableWebPreferences</a>.</p><p class="paragraph">This can be used as a view model for a user preferences screen. Every data you can get from the editor is observable so if you use it in a composable function, it will be recomposed on every change.</p><h4 class="tableheader">See also</h4><div class="table"><div class="table-row table-row_content" data-filterable-current=":readium:navigators:web:readium-navigator-web-reflowable/main" data-filterable-set=":readium:navigators:web:readium-navigator-web-reflowable/main"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><a href="../-reflowable-web-preferences/index.html"><span>Reflowable</span><wbr><span>Web</span><wbr><span><span>Preferences</span></span></a></div></span></div><div></div></div></div><div class="table-row table-row_content" data-filterable-current=":readium:navigators:web:readium-navigator-web-reflowable/main" data-filterable-set=":readium:navigators:web:readium-navigator-web-reflowable/main"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><a href="../-reflowable-web-settings/index.html"><span>Reflowable</span><wbr><span>Web</span><wbr><span><span>Settings</span></span></a></div></span></div><div></div></div></div></div></div></div>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="PROPERTY">
+        <h2 class="tableheader">Properties</h2>
+        <div class="table"><a data-name="-1277594721%2FProperties%2F931903066" anchor-label="backgroundColor" id="-1277594721%2FProperties%2F931903066" data-filterable-set=":readium:navigators:web:readium-navigator-web-reflowable/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":readium:navigators:web:readium-navigator-web-reflowable/main" data-filterable-set=":readium:navigators:web:readium-navigator-web-reflowable/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="background-color.html"><span>background</span><wbr><span><span>Color</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1277594721%2FProperties%2F931903066"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":readium:navigators:web:readium-navigator-web-reflowable/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="background-color.html">backgroundColor</a><span class="token operator">: </span><a href="../../../../../../readium/readium-navigator/org.readium.r2.navigator.preferences/-preference/index.html">Preference</a><span class="token operator">&lt;</span><a href="../../../../../../readium/readium-navigator/org.readium.r2.navigator.preferences/-color/index.html">Color</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Default background color.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="534361883%2FProperties%2F931903066" anchor-label="columnCount" id="534361883%2FProperties%2F931903066" data-filterable-set=":readium:navigators:web:readium-navigator-web-reflowable/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":readium:navigators:web:readium-navigator-web-reflowable/main" data-filterable-set=":readium:navigators:web:readium-navigator-web-reflowable/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="column-count.html"><span>column</span><wbr><span><span>Count</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="534361883%2FProperties%2F931903066"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":readium:navigators:web:readium-navigator-web-reflowable/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="column-count.html">columnCount</a><span class="token operator">: </span><a href="../../../../../../readium/readium-navigator/org.readium.r2.navigator.preferences/-optional-range-preference/index.html">OptionalRangePreference</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Number of reflowable columns to display .</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="475288339%2FProperties%2F931903066" anchor-label="fontFamily" id="475288339%2FProperties%2F931903066" data-filterable-set=":readium:navigators:web:readium-navigator-web-reflowable/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":readium:navigators:web:readium-navigator-web-reflowable/main" data-filterable-set=":readium:navigators:web:readium-navigator-web-reflowable/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="font-family.html"><span>font</span><wbr><span><span>Family</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="475288339%2FProperties%2F931903066"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":readium:navigators:web:readium-navigator-web-reflowable/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="font-family.html">fontFamily</a><span class="token operator">: </span><a href="../../../../../../readium/readium-navigator/org.readium.r2.navigator.preferences/-preference/index.html">Preference</a><span class="token operator">&lt;</span><a href="../../../../../../readium/readium-navigator/org.readium.r2.navigator.preferences/-font-family/index.html">FontFamily</a><span class="token operator">?</span><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Default typeface for the text.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-445214826%2FProperties%2F931903066" anchor-label="fontSize" id="-445214826%2FProperties%2F931903066" data-filterable-set=":readium:navigators:web:readium-navigator-web-reflowable/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":readium:navigators:web:readium-navigator-web-reflowable/main" data-filterable-set=":readium:navigators:web:readium-navigator-web-reflowable/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="font-size.html"><span>font</span><wbr><span><span>Size</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-445214826%2FProperties%2F931903066"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":readium:navigators:web:readium-navigator-web-reflowable/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="font-size.html">fontSize</a><span class="token operator">: </span><a href="../../../../../../readium/readium-navigator/org.readium.r2.navigator.preferences/-range-preference/index.html">RangePreference</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Base text font size as a percentage. Default to 100%.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="219662975%2FProperties%2F931903066" anchor-label="fontWeight" id="219662975%2FProperties%2F931903066" data-filterable-set=":readium:navigators:web:readium-navigator-web-reflowable/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":readium:navigators:web:readium-navigator-web-reflowable/main" data-filterable-set=":readium:navigators:web:readium-navigator-web-reflowable/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="font-weight.html"><span>font</span><wbr><span><span>Weight</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="219662975%2FProperties%2F931903066"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":readium:navigators:web:readium-navigator-web-reflowable/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="font-weight.html">fontWeight</a><span class="token operator">: </span><a href="../../../../../../readium/readium-navigator/org.readium.r2.navigator.preferences/-range-preference/index.html">RangePreference</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Default boldness for the text as a percentage.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1786086029%2FProperties%2F931903066" anchor-label="hyphens" id="-1786086029%2FProperties%2F931903066" data-filterable-set=":readium:navigators:web:readium-navigator-web-reflowable/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":readium:navigators:web:readium-navigator-web-reflowable/main" data-filterable-set=":readium:navigators:web:readium-navigator-web-reflowable/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="hyphens.html"><span><span>hyphens</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1786086029%2FProperties%2F931903066"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":readium:navigators:web:readium-navigator-web-reflowable/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="hyphens.html">hyphens</a><span class="token operator">: </span><a href="../../../../../../readium/readium-navigator/org.readium.r2.navigator.preferences/-preference/index.html">Preference</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Enable hyphenation for latin languages.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1460858111%2FProperties%2F931903066" anchor-label="imageFilter" id="-1460858111%2FProperties%2F931903066" data-filterable-set=":readium:navigators:web:readium-navigator-web-reflowable/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":readium:navigators:web:readium-navigator-web-reflowable/main" data-filterable-set=":readium:navigators:web:readium-navigator-web-reflowable/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="image-filter.html"><span>image</span><wbr><span><span>Filter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1460858111%2FProperties%2F931903066"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":readium:navigators:web:readium-navigator-web-reflowable/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="image-filter.html">imageFilter</a><span class="token operator">: </span><a href="../../../../../../readium/readium-navigator/org.readium.r2.navigator.preferences/-enum-preference/index.html">EnumPreference</a><span class="token operator">&lt;</span><a href="../../../../../../readium/readium-navigator/org.readium.r2.navigator.preferences/-image-filter/index.html">ImageFilter</a><span class="token operator">?</span><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Filter applied to images.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="304914990%2FProperties%2F931903066" anchor-label="language" id="304914990%2FProperties%2F931903066" data-filterable-set=":readium:navigators:web:readium-navigator-web-reflowable/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":readium:navigators:web:readium-navigator-web-reflowable/main" data-filterable-set=":readium:navigators:web:readium-navigator-web-reflowable/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="language.html"><span><span>language</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="304914990%2FProperties%2F931903066"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":readium:navigators:web:readium-navigator-web-reflowable/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="language.html">language</a><span class="token operator">: </span><a href="../../../../../../readium/readium-navigator/org.readium.r2.navigator.preferences/-preference/index.html">Preference</a><span class="token operator">&lt;</span><a href="../../../../../../readium/readium-shared/org.readium.r2.shared.util/-language/index.html">Language</a><span class="token operator">?</span><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Language of the publication content.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1657292791%2FProperties%2F931903066" anchor-label="letterSpacing" id="1657292791%2FProperties%2F931903066" data-filterable-set=":readium:navigators:web:readium-navigator-web-reflowable/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":readium:navigators:web:readium-navigator-web-reflowable/main" data-filterable-set=":readium:navigators:web:readium-navigator-web-reflowable/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="letter-spacing.html"><span>letter</span><wbr><span><span>Spacing</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1657292791%2FProperties%2F931903066"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":readium:navigators:web:readium-navigator-web-reflowable/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="letter-spacing.html">letterSpacing</a><span class="token operator">: </span><a href="../../../../../../readium/readium-navigator/org.readium.r2.navigator.preferences/-range-preference/index.html">RangePreference</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Space between letters.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-616122036%2FProperties%2F931903066" anchor-label="ligatures" id="-616122036%2FProperties%2F931903066" data-filterable-set=":readium:navigators:web:readium-navigator-web-reflowable/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":readium:navigators:web:readium-navigator-web-reflowable/main" data-filterable-set=":readium:navigators:web:readium-navigator-web-reflowable/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="ligatures.html"><span><span>ligatures</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-616122036%2FProperties%2F931903066"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":readium:navigators:web:readium-navigator-web-reflowable/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="ligatures.html">ligatures</a><span class="token operator">: </span><a href="../../../../../../readium/readium-navigator/org.readium.r2.navigator.preferences/-preference/index.html">Preference</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Enable ligatures in Arabic.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-755616149%2FProperties%2F931903066" anchor-label="lineHeight" id="-755616149%2FProperties%2F931903066" data-filterable-set=":readium:navigators:web:readium-navigator-web-reflowable/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":readium:navigators:web:readium-navigator-web-reflowable/main" data-filterable-set=":readium:navigators:web:readium-navigator-web-reflowable/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="line-height.html"><span>line</span><wbr><span><span>Height</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-755616149%2FProperties%2F931903066"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":readium:navigators:web:readium-navigator-web-reflowable/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="line-height.html">lineHeight</a><span class="token operator">: </span><a href="../../../../../../readium/readium-navigator/org.readium.r2.navigator.preferences/-range-preference/index.html">RangePreference</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Leading line height.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-483443029%2FProperties%2F931903066" anchor-label="linkColor" id="-483443029%2FProperties%2F931903066" data-filterable-set=":readium:navigators:web:readium-navigator-web-reflowable/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":readium:navigators:web:readium-navigator-web-reflowable/main" data-filterable-set=":readium:navigators:web:readium-navigator-web-reflowable/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="link-color.html"><span>link</span><wbr><span><span>Color</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-483443029%2FProperties%2F931903066"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":readium:navigators:web:readium-navigator-web-reflowable/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="link-color.html">linkColor</a><span class="token operator">: </span><a href="../../../../../../readium/readium-navigator/org.readium.r2.navigator.preferences/-preference/index.html">Preference</a><span class="token operator">&lt;</span><a href="../../../../../../readium/readium-navigator/org.readium.r2.navigator.preferences/-color/index.html">Color</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Link color.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1764520871%2FProperties%2F931903066" anchor-label="maximalLineLength" id="1764520871%2FProperties%2F931903066" data-filterable-set=":readium:navigators:web:readium-navigator-web-reflowable/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":readium:navigators:web:readium-navigator-web-reflowable/main" data-filterable-set=":readium:navigators:web:readium-navigator-web-reflowable/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="maximal-line-length.html"><span>maximal</span><wbr><span>Line</span><wbr><span><span>Length</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1764520871%2FProperties%2F931903066"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":readium:navigators:web:readium-navigator-web-reflowable/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="maximal-line-length.html">maximalLineLength</a><span class="token operator">: </span><a href="../../../../../../readium/readium-navigator/org.readium.r2.navigator.preferences/-optional-range-preference/index.html">OptionalRangePreference</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Factor applied to maximal line length.  Default to no maximal line length.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1728209657%2FProperties%2F931903066" anchor-label="minimalLineLength" id="1728209657%2FProperties%2F931903066" data-filterable-set=":readium:navigators:web:readium-navigator-web-reflowable/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":readium:navigators:web:readium-navigator-web-reflowable/main" data-filterable-set=":readium:navigators:web:readium-navigator-web-reflowable/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="minimal-line-length.html"><span>minimal</span><wbr><span>Line</span><wbr><span><span>Length</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1728209657%2FProperties%2F931903066"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":readium:navigators:web:readium-navigator-web-reflowable/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="minimal-line-length.html">minimalLineLength</a><span class="token operator">: </span><a href="../../../../../../readium/readium-navigator/org.readium.r2.navigator.preferences/-optional-range-preference/index.html">OptionalRangePreference</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Factor applied to minimal line length. Default to no minimal line length.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1842910675%2FProperties%2F931903066" anchor-label="minMargins" id="1842910675%2FProperties%2F931903066" data-filterable-set=":readium:navigators:web:readium-navigator-web-reflowable/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":readium:navigators:web:readium-navigator-web-reflowable/main" data-filterable-set=":readium:navigators:web:readium-navigator-web-reflowable/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="min-margins.html"><span>min</span><wbr><span><span>Margins</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1842910675%2FProperties%2F931903066"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":readium:navigators:web:readium-navigator-web-reflowable/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="min-margins.html">minMargins</a><span class="token operator">: </span><a href="../../../../../../readium/readium-navigator/org.readium.r2.navigator.preferences/-range-preference/index.html">RangePreference</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Factor applied to horizontal margins. Default to 1.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1491181432%2FProperties%2F931903066" anchor-label="optimalLineLength" id="1491181432%2FProperties%2F931903066" data-filterable-set=":readium:navigators:web:readium-navigator-web-reflowable/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":readium:navigators:web:readium-navigator-web-reflowable/main" data-filterable-set=":readium:navigators:web:readium-navigator-web-reflowable/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="optimal-line-length.html"><span>optimal</span><wbr><span>Line</span><wbr><span><span>Length</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1491181432%2FProperties%2F931903066"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":readium:navigators:web:readium-navigator-web-reflowable/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="optimal-line-length.html">optimalLineLength</a><span class="token operator">: </span><a href="../../../../../../readium/readium-navigator/org.readium.r2.navigator.preferences/-range-preference/index.html">RangePreference</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Factor applied to optimal line length. Default to 1.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1583606604%2FProperties%2F931903066" anchor-label="overridePublisherColors" id="-1583606604%2FProperties%2F931903066" data-filterable-set=":readium:navigators:web:readium-navigator-web-reflowable/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":readium:navigators:web:readium-navigator-web-reflowable/main" data-filterable-set=":readium:navigators:web:readium-navigator-web-reflowable/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="override-publisher-colors.html"><span>override</span><wbr><span>Publisher</span><wbr><span><span>Colors</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1583606604%2FProperties%2F931903066"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":readium:navigators:web:readium-navigator-web-reflowable/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="override-publisher-colors.html">overridePublisherColors</a><span class="token operator">: </span><a href="../../../../../../readium/readium-navigator/org.readium.r2.navigator.preferences/-preference/index.html">Preference</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Normalize text styles to increase accessibility.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1084233126%2FProperties%2F931903066" anchor-label="paragraphIndent" id="-1084233126%2FProperties%2F931903066" data-filterable-set=":readium:navigators:web:readium-navigator-web-reflowable/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":readium:navigators:web:readium-navigator-web-reflowable/main" data-filterable-set=":readium:navigators:web:readium-navigator-web-reflowable/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="paragraph-indent.html"><span>paragraph</span><wbr><span><span>Indent</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1084233126%2FProperties%2F931903066"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":readium:navigators:web:readium-navigator-web-reflowable/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="paragraph-indent.html">paragraphIndent</a><span class="token operator">: </span><a href="../../../../../../readium/readium-navigator/org.readium.r2.navigator.preferences/-range-preference/index.html">RangePreference</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Text indentation for paragraphs.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1898226639%2FProperties%2F931903066" anchor-label="paragraphSpacing" id="-1898226639%2FProperties%2F931903066" data-filterable-set=":readium:navigators:web:readium-navigator-web-reflowable/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":readium:navigators:web:readium-navigator-web-reflowable/main" data-filterable-set=":readium:navigators:web:readium-navigator-web-reflowable/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="paragraph-spacing.html"><span>paragraph</span><wbr><span><span>Spacing</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1898226639%2FProperties%2F931903066"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":readium:navigators:web:readium-navigator-web-reflowable/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="paragraph-spacing.html">paragraphSpacing</a><span class="token operator">: </span><a href="../../../../../../readium/readium-navigator/org.readium.r2.navigator.preferences/-range-preference/index.html">RangePreference</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Vertical margins for paragraphs.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="997330012%2FProperties%2F931903066" anchor-label="preferences" id="997330012%2FProperties%2F931903066" data-filterable-set=":readium:navigators:web:readium-navigator-web-reflowable/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":readium:navigators:web:readium-navigator-web-reflowable/main" data-filterable-set=":readium:navigators:web:readium-navigator-web-reflowable/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="preferences.html"><span><span>preferences</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="997330012%2FProperties%2F931903066"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":readium:navigators:web:readium-navigator-web-reflowable/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">val </span><a href="preferences.html">preferences</a><span class="token operator">: </span><a href="../-reflowable-web-preferences/index.html">ReflowableWebPreferences</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-952732265%2FProperties%2F931903066" anchor-label="readingProgression" id="-952732265%2FProperties%2F931903066" data-filterable-set=":readium:navigators:web:readium-navigator-web-reflowable/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":readium:navigators:web:readium-navigator-web-reflowable/main" data-filterable-set=":readium:navigators:web:readium-navigator-web-reflowable/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="reading-progression.html"><span>reading</span><wbr><span><span>Progression</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-952732265%2FProperties%2F931903066"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":readium:navigators:web:readium-navigator-web-reflowable/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="reading-progression.html">readingProgression</a><span class="token operator">: </span><a href="../../../../../../readium/readium-navigator/org.readium.r2.navigator.preferences/-enum-preference/index.html">EnumPreference</a><span class="token operator">&lt;</span><a href="../../../../../../readium/readium-navigator/org.readium.r2.navigator.preferences/-reading-progression/index.html">ReadingProgression</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Direction of the reading progression across resources.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-478492007%2FProperties%2F931903066" anchor-label="scroll" id="-478492007%2FProperties%2F931903066" data-filterable-set=":readium:navigators:web:readium-navigator-web-reflowable/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":readium:navigators:web:readium-navigator-web-reflowable/main" data-filterable-set=":readium:navigators:web:readium-navigator-web-reflowable/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="scroll.html"><span><span>scroll</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-478492007%2FProperties%2F931903066"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":readium:navigators:web:readium-navigator-web-reflowable/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="scroll.html">scroll</a><span class="token operator">: </span><a href="../../../../../../readium/readium-navigator/org.readium.r2.navigator.preferences/-preference/index.html">Preference</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Indicates if the overflow of resources should be handled using scrolling instead of synthetic pagination.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1899076669%2FProperties%2F931903066" anchor-label="settings" id="-1899076669%2FProperties%2F931903066" data-filterable-set=":readium:navigators:web:readium-navigator-web-reflowable/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":readium:navigators:web:readium-navigator-web-reflowable/main" data-filterable-set=":readium:navigators:web:readium-navigator-web-reflowable/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="settings.html"><span><span>settings</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1899076669%2FProperties%2F931903066"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":readium:navigators:web:readium-navigator-web-reflowable/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">val </span><a href="settings.html">settings</a><span class="token operator">: </span><a href="../-reflowable-web-settings/index.html">ReflowableWebSettings</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1053422788%2FProperties%2F931903066" anchor-label="textAlign" id="-1053422788%2FProperties%2F931903066" data-filterable-set=":readium:navigators:web:readium-navigator-web-reflowable/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":readium:navigators:web:readium-navigator-web-reflowable/main" data-filterable-set=":readium:navigators:web:readium-navigator-web-reflowable/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="text-align.html"><span>text</span><wbr><span><span>Align</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1053422788%2FProperties%2F931903066"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":readium:navigators:web:readium-navigator-web-reflowable/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="text-align.html">textAlign</a><span class="token operator">: </span><a href="../../../../../../readium/readium-navigator/org.readium.r2.navigator.preferences/-enum-preference/index.html">EnumPreference</a><span class="token operator">&lt;</span><a href="../../../../../../readium/readium-navigator/org.readium.r2.navigator.preferences/-text-align/index.html">TextAlign</a><span class="token operator">?</span><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Page text alignment.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-488638306%2FProperties%2F931903066" anchor-label="textColor" id="-488638306%2FProperties%2F931903066" data-filterable-set=":readium:navigators:web:readium-navigator-web-reflowable/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":readium:navigators:web:readium-navigator-web-reflowable/main" data-filterable-set=":readium:navigators:web:readium-navigator-web-reflowable/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="text-color.html"><span>text</span><wbr><span><span>Color</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-488638306%2FProperties%2F931903066"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":readium:navigators:web:readium-navigator-web-reflowable/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="text-color.html">textColor</a><span class="token operator">: </span><a href="../../../../../../readium/readium-navigator/org.readium.r2.navigator.preferences/-preference/index.html">Preference</a><span class="token operator">&lt;</span><a href="../../../../../../readium/readium-navigator/org.readium.r2.navigator.preferences/-color/index.html">Color</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Default page text color.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2035127204%2FProperties%2F931903066" anchor-label="textNormalization" id="2035127204%2FProperties%2F931903066" data-filterable-set=":readium:navigators:web:readium-navigator-web-reflowable/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":readium:navigators:web:readium-navigator-web-reflowable/main" data-filterable-set=":readium:navigators:web:readium-navigator-web-reflowable/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="text-normalization.html"><span>text</span><wbr><span><span>Normalization</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2035127204%2FProperties%2F931903066"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":readium:navigators:web:readium-navigator-web-reflowable/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="text-normalization.html">textNormalization</a><span class="token operator">: </span><a href="../../../../../../readium/readium-navigator/org.readium.r2.navigator.preferences/-preference/index.html">Preference</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Normalize text styles to increase accessibility.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="200356259%2FProperties%2F931903066" anchor-label="verticalText" id="200356259%2FProperties%2F931903066" data-filterable-set=":readium:navigators:web:readium-navigator-web-reflowable/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":readium:navigators:web:readium-navigator-web-reflowable/main" data-filterable-set=":readium:navigators:web:readium-navigator-web-reflowable/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="vertical-text.html"><span>vertical</span><wbr><span><span>Text</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="200356259%2FProperties%2F931903066"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":readium:navigators:web:readium-navigator-web-reflowable/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="vertical-text.html">verticalText</a><span class="token operator">: </span><a href="../../../../../../readium/readium-navigator/org.readium.r2.navigator.preferences/-preference/index.html">Preference</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Indicates whether the text should be laid out vertically. This is used for example with CJK languages. This setting is automatically derived from the language if no preference is given.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="683271629%2FProperties%2F931903066" anchor-label="visitedColor" id="683271629%2FProperties%2F931903066" data-filterable-set=":readium:navigators:web:readium-navigator-web-reflowable/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":readium:navigators:web:readium-navigator-web-reflowable/main" data-filterable-set=":readium:navigators:web:readium-navigator-web-reflowable/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="visited-color.html"><span>visited</span><wbr><span><span>Color</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="683271629%2FProperties%2F931903066"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":readium:navigators:web:readium-navigator-web-reflowable/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="visited-color.html">visitedColor</a><span class="token operator">: </span><a href="../../../../../../readium/readium-navigator/org.readium.r2.navigator.preferences/-preference/index.html">Preference</a><span class="token operator">&lt;</span><a href="../../../../../../readium/readium-navigator/org.readium.r2.navigator.preferences/-color/index.html">Color</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Color for visited links.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1606952091%2FProperties%2F931903066" anchor-label="wordSpacing" id="1606952091%2FProperties%2F931903066" data-filterable-set=":readium:navigators:web:readium-navigator-web-reflowable/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":readium:navigators:web:readium-navigator-web-reflowable/main" data-filterable-set=":readium:navigators:web:readium-navigator-web-reflowable/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="word-spacing.html"><span>word</span><wbr><span><span>Spacing</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1606952091%2FProperties%2F931903066"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":readium:navigators:web:readium-navigator-web-reflowable/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="word-spacing.html">wordSpacing</a><span class="token operator">: </span><a href="../../../../../../readium/readium-navigator/org.readium.r2.navigator.preferences/-range-preference/index.html">RangePreference</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Space between words.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="FUNCTION">
+        <h2 class="tableheader">Functions</h2>
+        <div class="table"><a data-name="-1196053529%2FFunctions%2F931903066" anchor-label="clear" id="-1196053529%2FFunctions%2F931903066" data-filterable-set=":readium:navigators:web:readium-navigator-web-reflowable/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":readium:navigators:web:readium-navigator-web-reflowable/main" data-filterable-set=":readium:navigators:web:readium-navigator-web-reflowable/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="clear.html"><span><span>clear</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1196053529%2FFunctions%2F931903066"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":readium:navigators:web:readium-navigator-web-reflowable/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="clear.html"><span class="token function">clear</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Reset all preferences.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="footer">
+        <div class="footer--container">
+            <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+            <div class="footer--content">
+                <div>
+                    <span>Generated by </span>
+                    <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                        Dokka
+                    </a>
+                    <div>© 2026 Copyright</div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
