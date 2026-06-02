@@ -4,7 +4,14 @@ All notable changes to this project will be documented in this file. Take a look
 
 **Warning:** Features marked as *experimental* may change or be removed in a future release without notice. Use with caution.
 
-<!-- ## [Unreleased] -->
+## [Unreleased]
+
+### Fixed
+
+#### Navigator
+
+* Fixed loading of EPUB assets, such as fonts, referenced from publication resources. They were previously blocked by cross-origin (CORS) restrictions.
+
 
 ## [3.2.0] - 2026-05-13
 
