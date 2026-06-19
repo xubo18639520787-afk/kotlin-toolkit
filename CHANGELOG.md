@@ -4,7 +4,17 @@ All notable changes to this project will be documented in this file. Take a look
 
 **Warning:** Features marked as *experimental* may change or be removed in a future release without notice. Use with caution.
 
-<!-- ## [Unreleased] -->
+## [Unreleased]
+
+### Added
+
+#### Navigator
+
+* The EPUB navigator now reports the image under a tap through the new experimental `TapEvent.targetElement` property, making it easy to build features such as image previews.
+    * Downcast `targetElement.content` to `Content.ImageElement` (for `<img>` and `<svg src=...>`) or `Content.SvgElement` (for inline `<svg>`) to access the image metadata.
+    * Images wrapped in an interactive element (e.g. `<a><img></a>`) are not reported, consistent with the Swift toolkit.
+    * See the [EPUB Image Preview guide](docs/guides/navigator/epub-image-preview.md).
+
 
 ## [3.3.0] - 2026-06-02
 

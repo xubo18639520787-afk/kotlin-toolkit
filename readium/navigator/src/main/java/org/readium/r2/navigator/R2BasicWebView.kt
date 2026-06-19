@@ -64,7 +64,7 @@ internal open class R2BasicWebView(context: Context, attrs: AttributeSet) : WebV
         fun onPageLoaded(webView: R2BasicWebView, link: Link) {}
         fun onPageChanged(pageIndex: Int, totalPages: Int, url: String) {}
         fun onPageEnded(end: Boolean) {}
-        fun onTap(point: PointF): Boolean = false
+        fun onTap(point: PointF, targetElement: TargetElementData?): Boolean = false
         fun onDragStart(event: DragEvent): Boolean = false
         fun onDragMove(event: DragEvent): Boolean = false
         fun onDragEnd(event: DragEvent): Boolean = false
@@ -305,7 +305,9 @@ internal open class R2BasicWebView(context: Context, attrs: AttributeSet) : WebV
             return handleFootnote(event.interactiveElement)
         }
 
-        return runBlocking(uiScope.coroutineContext) { listener?.onTap(event.point) ?: false }
+        return runBlocking(uiScope.coroutineContext) {
+            listener?.onTap(event.point, event.targetElement) ?: false
+        }
     }
 
     /**
@@ -330,7 +332,7 @@ internal open class R2BasicWebView(context: Context, attrs: AttributeSet) : WebV
     private data class TapEvent(
         val defaultPrevented: Boolean,
         val point: PointF,
-        val targetElement: String,
+        val targetElement: TargetElementData?,
         val interactiveElement: String?,
     ) {
         companion object {
@@ -343,7 +345,9 @@ internal open class R2BasicWebView(context: Context, attrs: AttributeSet) : WebV
                 return TapEvent(
                     defaultPrevented = obj.optBoolean("defaultPrevented"),
                     point = PointF(x, y),
-                    targetElement = obj.optString("targetElement"),
+                    targetElement = TargetElementData.fromJSONObject(
+                        obj.optJSONObject("targetElement")
+                    ),
                     interactiveElement = obj.optNullableString("interactiveElement")
                 )
             }
@@ -645,6 +649,46 @@ internal open class R2BasicWebView(context: Context, attrs: AttributeSet) : WebV
         override fun onGetContentRect(mode: ActionMode?, view: View?, outRect: Rect?) =
             callback2?.onGetContentRect(mode, view, outRect)
                 ?: super.onGetContentRect(mode, view, outRect)
+    }
+}
+
+/**
+ * Metadata about the element under a tap, produced by `extractTargetElement()` in gestures.js.
+ *
+ * @param tag Lowercased tag name of the image element (e.g. `img`, `svg`).
+ * @param html Raw outer HTML, only present for inline SVGs without a resolvable source.
+ * @param src Absolute URL of the image source, resolved against the document base URI.
+ * @param frame On-screen frame of the element, in device pixels.
+ * @param accessibilityLabel Accessibility label extracted from the `aria-label` attribute.
+ * @param caption Caption extracted from `alt`, `title`, SVG `<title>`/`<desc>` or `<figcaption>`.
+ * @param cssSelector CSS selector targeting the element in the resource.
+ */
+internal data class TargetElementData(
+    val tag: String,
+    val html: String?,
+    val src: String?,
+    val frame: RectF,
+    val accessibilityLabel: String?,
+    val caption: String?,
+    val cssSelector: String?,
+) {
+    companion object {
+        fun fromJSONObject(obj: JSONObject?): TargetElementData? {
+            obj ?: return null
+
+            val tag = obj.optNullableString("tag") ?: return null
+            val frame = obj.optRectF("frame") ?: return null
+
+            return TargetElementData(
+                tag = tag,
+                html = obj.optNullableString("html"),
+                src = obj.optNullableString("src"),
+                frame = frame,
+                accessibilityLabel = obj.optNullableString("accessibilityLabel"),
+                caption = obj.optNullableString("caption"),
+                cssSelector = obj.optNullableString("cssSelector")
+            )
+        }
     }
 }
 

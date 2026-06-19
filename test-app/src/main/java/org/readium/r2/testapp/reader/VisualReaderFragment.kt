@@ -68,6 +68,7 @@ import org.readium.r2.navigator.util.BaseActionModeCallback
 import org.readium.r2.navigator.util.DirectionalNavigationAdapter
 import org.readium.r2.shared.ExperimentalReadiumApi
 import org.readium.r2.shared.publication.Locator
+import org.readium.r2.shared.publication.services.content.Content
 import org.readium.r2.shared.util.Language
 import org.readium.r2.testapp.R
 import org.readium.r2.testapp.data.model.Highlight
@@ -122,6 +123,18 @@ abstract class VisualReaderFragment : BaseReaderFragment() {
         }
 
         (navigator as VisualNavigator).apply {
+            // Present a preview when the user taps an image. Bind it before the toggle-system-UI
+            // listener so it takes precedence.
+            addInputListener(object : InputListener {
+                @OptIn(ExperimentalReadiumApi::class)
+                override fun onTap(event: TapEvent): Boolean {
+                    val image = event.targetElement?.content as? Content.ImageElement
+                        ?: return false
+                    showImagePreview(image)
+                    return true
+                }
+            })
+
             addInputListener(object : InputListener {
                 override fun onTap(event: TapEvent): Boolean {
                     requireActivity().toggleSystemUi()
@@ -615,6 +628,14 @@ abstract class VisualReaderFragment : BaseReaderFragment() {
                 0
             )
         }
+    }
+
+    // Image Preview
+
+    @OptIn(ExperimentalReadiumApi::class)
+    private fun showImagePreview(image: Content.ImageElement) {
+        ImagePreviewDialogFragment(image)
+            .show(childFragmentManager, ImagePreviewDialogFragment.TAG)
     }
 
     fun updateSystemUiVisibility() {

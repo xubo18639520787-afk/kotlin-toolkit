@@ -54,6 +54,7 @@ import org.readium.r2.navigator.R2BasicWebView
 import org.readium.r2.navigator.RestorationNotSupportedException
 import org.readium.r2.navigator.SelectableNavigator
 import org.readium.r2.navigator.Selection
+import org.readium.r2.navigator.TargetElementData
 import org.readium.r2.navigator.databinding.ReadiumNavigatorViewpagerBinding
 import org.readium.r2.navigator.dummyPublication
 import org.readium.r2.navigator.epub.EpubNavigatorViewModel.RunScriptCommand
@@ -71,6 +72,7 @@ import org.readium.r2.navigator.input.InputListener
 import org.readium.r2.navigator.input.KeyEvent
 import org.readium.r2.navigator.input.KeyInterceptorView
 import org.readium.r2.navigator.input.TapEvent
+import org.readium.r2.navigator.input.TargetElement
 import org.readium.r2.navigator.pager.R2EpubPageFragment
 import org.readium.r2.navigator.pager.R2PagerAdapter
 import org.readium.r2.navigator.pager.R2PagerAdapter.PageResource
@@ -88,6 +90,7 @@ import org.readium.r2.shared.publication.Layout
 import org.readium.r2.shared.publication.Link
 import org.readium.r2.shared.publication.Locator
 import org.readium.r2.shared.publication.Publication
+import org.readium.r2.shared.publication.services.content.Content
 import org.readium.r2.shared.publication.services.positionsByReadingOrder
 import org.readium.r2.shared.util.AbsoluteUrl
 import org.readium.r2.shared.util.Url
@@ -735,6 +738,73 @@ public class EpubNavigatorFragment internal constructor(
             RectF(left, top + topOffset, right, bottom)
         } ?: this
 
+    /**
+     * Builds the public [TargetElement] from the raw metadata produced by gestures.js.
+     */
+    private fun buildTargetElement(data: TargetElementData): TargetElement? {
+        // The resource owning the web view that emitted the tap.
+        val resourceLink = currentReflowablePageFragment?.link ?: return null
+
+        // Locator pointing to the element inside the resource that contains it.
+        val locator = Locator(
+            href = resourceLink.url(),
+            mediaType = resourceLink.mediaType ?: MediaType.XHTML,
+            locations = Locator.Locations(
+                otherLocations = data.cssSelector
+                    ?.let { mapOf("cssSelector" to it) }
+                    ?: emptyMap()
+            )
+        )
+
+        val content = buildContentElement(data, locator) ?: return null
+
+        return TargetElement(
+            frame = data.frame.adjustedToViewport(),
+            content = content
+        )
+    }
+
+    /**
+     * Maps the target element metadata to a [Content.Element], following the same discrimination
+     * rule as the Swift toolkit: when a resolvable source is found, the element is an
+     * [Content.ImageElement] (covers `<img>` and `<svg href=...>`); otherwise an inline `<svg>`
+     * becomes a [Content.SvgElement].
+     */
+    private fun buildContentElement(data: TargetElementData, locator: Locator): Content.Element? {
+        val attributes = buildList {
+            data.accessibilityLabel?.takeIf { it.isNotBlank() }?.let { label ->
+                add(Content.Attribute(Content.AttributeKey.ACCESSIBILITY_LABEL, label))
+            }
+        }
+
+        // Look up the source in the publication manifest so the client gets full metadata (media
+        // type, etc.). For resources not in the manifest (e.g. external images), we synthesise a
+        // plain Link.
+        val embeddedLink = (data.src?.let { Url(it) } as? AbsoluteUrl)
+            ?.let { url -> viewModel.internalLinkFromUrl(url) ?: Link(href = url) }
+
+        if (embeddedLink != null) {
+            return Content.ImageElement(
+                locator = locator,
+                embeddedLink = embeddedLink,
+                caption = data.caption,
+                attributes = attributes
+            )
+        }
+
+        // Inline SVG fallback.
+        if (data.tag == "svg" && data.html != null) {
+            return Content.SvgElement(
+                locator = locator,
+                svg = data.html,
+                caption = data.caption,
+                attributes = attributes
+            )
+        }
+
+        return null
+    }
+
     // DecorableNavigator
 
     override fun <T : Decoration.Style> supportsDecorationStyle(style: KClass<T>): Boolean =
@@ -790,8 +860,10 @@ public class EpubNavigatorFragment internal constructor(
         override fun javascriptInterfacesForResource(link: Link): Map<String, Any?> =
             config.javascriptInterfaces.mapValues { (_, factory) -> factory(link) }
 
-        override fun onTap(point: PointF): Boolean =
-            inputListener.onTap(TapEvent(point))
+        override fun onTap(point: PointF, targetElement: TargetElementData?): Boolean =
+            inputListener.onTap(
+                TapEvent(point, targetElement?.let { buildTargetElement(it) })
+            )
 
         override fun onDragStart(event: R2BasicWebView.DragEvent): Boolean =
             onDrag(DragEvent.Type.Start, event)
