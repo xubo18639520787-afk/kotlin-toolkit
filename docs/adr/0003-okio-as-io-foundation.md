@@ -1,0 +1,3 @@
+# Okio as the internal I/O foundation for common code
+
+Common code needs file-system access and random-access positional reads (`Resource.read(range)`, zip central-directory seeks). We use Okio internally: its multiplatform `FileSystem` and `FileHandle` (positional reads) cover exactly this, and `ByteString` replaces `java.security.MessageDigest` for hashing. kotlinx-io was rejected for now because it is pre-1.0 and lacks a `FileHandle` equivalent for positional reads, which we would have to work around with expect/actuals anyway. Okio stays an implementation detail: Readium's own `Readable`/`Resource`/`Container` abstractions remain the public API, so swapping to kotlinx-io later would not break consumers.
