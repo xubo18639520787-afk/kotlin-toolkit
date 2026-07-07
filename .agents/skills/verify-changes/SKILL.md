@@ -35,7 +35,7 @@ A change is **not done** because it compiles, and not done because it "should wo
 
 Beyond tests, a change isn't complete until:
 
-- Edits under `readium/navigator/src/main/assets/_scripts/` or `readium/navigators/web/internals/scripts/` are rebundled (`make scripts-legacy` / `make scripts-new`) and the regenerated bundles are included in the change. (The Stop hook runs this automatically and blocks if bundling fails — fix the errors, don't bypass it.) Verify the TypeScript side directly with `pnpm run lint` and `pnpm run test` (if present) in the scripts directory when the JS layer changed.
+- Edits under `readium/navigator/src/main/assets/_scripts/` or `readium/navigators/web/internals/scripts/` are rebundled (`make scripts-legacy` / `make scripts-new`) and the regenerated bundles are included in the change. (The project's quality hook regenerates these automatically on agents that support hooks — Claude Code and GitHub Copilot; on other agents, run the command yourself. Either way, bundling must succeed before finishing — don't bypass a failure.) Verify the TypeScript side directly with `pnpm run lint` and `pnpm run test` (if present) in the scripts directory when the JS layer changed.
 - Public API changes carry their CHANGELOG.md / migration-guide entries (see `change-public-api`).
 
 ## Report honestly
