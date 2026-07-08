@@ -84,7 +84,6 @@ class UrlTest {
         assertEquals(expected, url.toString())
     }
 
-    @OptIn(InternalReadiumApi::class)
     @Test
     fun createFromEpubHref() {
         fun testEpub(href: String, expected: String) {
