@@ -388,10 +388,32 @@ public fun Url.Companion.fromLegacyHref(href: String): Url? =
  *
  * As a workaround, we assume the HREFs are valid percent-encoded URLs, and fallback to decoded paths
  * if we can't parse the URL.
+ *
+ * When falling back to a decoded path, only the path portion is percent-encoded: any `?query` and
+ * `#fragment` are split off and reattached verbatim. This keeps their `?`/`#` separators intact (a
+ * plain path encoding would turn them into `%3F`/`%23`) and preserves any existing encoding in the
+ * query or fragment instead of double-encoding it.
  */
 @InternalReadiumApi
-public fun Url.Companion.fromEpubHref(href: String): Url? =
-    Url(href) ?: fromDecodedPath(href)
+public fun Url.Companion.fromEpubHref(href: String): Url? {
+    // A well-formed HREF is already a valid percent-encoded URL.
+    Url(href)?.let { return it }
+
+    // Otherwise the HREF is not a valid URL (e.g. a decoded path containing spaces). Split off the
+    // query and fragment, encode only the path, then reassemble. The path ends at the first `?` or
+    // `#`: since the query always precedes the fragment in a URL, a `?` occurring inside a fragment
+    // is left in the suffix rather than mistaken for a query separator.
+    val splitIndex = href.indexOfFirst { it == '?' || it == '#' }
+    val pathPart = if (splitIndex < 0) href else href.substring(0, splitIndex)
+    val suffix = if (splitIndex < 0) "" else href.substring(splitIndex)
+
+    val pathUrl = fromDecodedPath(pathPart) ?: return null
+
+    // The suffix is reattached verbatim. Note this can degrade for malformed input: `Url()` parses
+    // via Java's stricter `URI`, so a raw space inside the query/fragment (e.g. `foo.xhtml#a b`)
+    // fails to re-parse and we fall back to `pathUrl` without the suffix.
+    return Url(pathUrl.toString() + suffix) ?: pathUrl
+}
 
 /**
  * Creates a URL pointing to this [File] which must denote an absolute path.

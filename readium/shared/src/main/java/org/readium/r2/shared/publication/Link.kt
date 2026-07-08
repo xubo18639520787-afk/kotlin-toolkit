@@ -207,16 +207,27 @@ public data class Link(
 }
 
 /**
- * Returns the first [Link] with the given [href], or null if not found.
+ * Returns the index of the first [Link] with the given [href], or null if not found.
+ *
+ * Falls back to ignoring the query and fragment of [href], to stay consistent with
+ * [Manifest.linkWithHref].
  */
-public fun List<Link>.indexOfFirstWithHref(href: Url): Int? =
-    indexOfFirst { it.url().isEquivalent(href) }
-        .takeUnless { it == -1 }
+public fun List<Link>.indexOfFirstWithHref(href: Url): Int? {
+    fun index(href: Url): Int? =
+        indexOfFirst { it.url().isEquivalent(href) }.takeUnless { it == -1 }
+
+    return index(href)
+        ?: index(href.removeQuery().removeFragment())
+}
 
 /**
- * Finds the first link matching the given HREF.
+ * Finds the first [Link] with the given [href], or null if not found.
+ *
+ * Falls back to ignoring the query and fragment of [href], to stay consistent with
+ * [Manifest.linkWithHref].
  */
-public fun List<Link>.firstWithHref(href: Url): Link? = firstOrNull { it.url().isEquivalent(href) }
+public fun List<Link>.firstWithHref(href: Url): Link? =
+    indexOfFirstWithHref(href)?.let { this[it] }
 
 /**
  * Finds the first link with the given relation.
