@@ -20,7 +20,7 @@ androidx-compose-material = "1.10.5"
 androidx-compose-runtime = "1.10.5"
 androidx-compose-ui = "1.10.5"
 
-androidx-compose-material3 = "2025.01.0"
+androidx-compose-material3 = "1.4.0"
 androidx-constraintlayout = "2.2.1"
 androidx-core = "1.18.0"
 androidx-datastore = "1.2.1"
