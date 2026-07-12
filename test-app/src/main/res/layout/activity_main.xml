@@ -12,7 +12,6 @@
         android:layout_marginEnd="0dp"
         android:background="?attr/colorSurface"
         app:headerLayout="@layout/nav_header"
-        app:itemActiveIndicatorStyle="@style/Widget.Material3.NavigationRail.ActiveIndicator"
         app:itemIconTint="?attr/colorPrimary"
         app:itemTextColor="?attr/colorOnSurface"
         app:labelVisibilityMode="selected"
