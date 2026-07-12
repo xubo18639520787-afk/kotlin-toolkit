@@ -20,7 +20,10 @@ import androidx.compose.ui.platform.LocalContext
  * Setup the Compose app-wide theme.
  */
 @Composable
-fun AppTheme(useDarkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
+fun AppTheme(
+    useDarkTheme: Boolean = isSystemInDarkTheme(),
+    content: @Composable () -> Unit
+) {
     val colors = when {
         Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
             when {
@@ -28,8 +31,8 @@ fun AppTheme(useDarkTheme: Boolean = isSystemInDarkTheme(), content: @Composable
                 else -> dynamicLightColorScheme(LocalContext.current)
             }
         }
-        useDarkTheme -> lightColorScheme()
-        else -> darkColorScheme()
+        useDarkTheme -> darkColorScheme()
+        else -> lightColorScheme()
     }
     MaterialTheme(
         colorScheme = colors,

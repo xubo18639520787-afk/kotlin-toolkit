@@ -30,6 +30,9 @@
         android:layout_gravity="end|bottom"
         android:layout_margin="16dp"
         android:contentDescription="@string/add_book"
-        android:src="@drawable/add" />
+        android:src="@drawable/add"
+        app:backgroundTint="?attr/colorPrimaryContainer"
+        app:tint="?attr/colorOnPrimaryContainer"
+        app:elevation="6dp" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

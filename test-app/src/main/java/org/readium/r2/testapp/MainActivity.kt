@@ -17,7 +17,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.navigationrail.NavigationRailView
 import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity() {
@@ -29,13 +29,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.container)) { v, insets ->
             val statusBars = insets.getInsets(WindowInsetsCompat.Type.statusBars())
             v.setPadding(statusBars.left, statusBars.top, statusBars.right, statusBars.bottom)
             insets
         }
 
-        val navView: BottomNavigationView = findViewById(R.id.nav_view)
+        val navView: NavigationRailView = findViewById(R.id.nav_view)
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController

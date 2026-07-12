@@ -12,11 +12,13 @@ import android.view.MenuItem
 import android.view.WindowManager
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentResultListener
 import androidx.fragment.app.commit
 import androidx.fragment.app.commitNow
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.appbar.MaterialToolbar
 import org.readium.r2.shared.publication.Locator
 import org.readium.r2.shared.util.toUri
 import org.readium.r2.testapp.Application
@@ -36,6 +38,9 @@ import org.readium.r2.testapp.utils.launchWebBrowser
 open class ReaderActivity : AppCompatActivity() {
 
     private val model: ReaderViewModel by viewModels()
+    private lateinit var binding: ActivityReaderBinding
+    private lateinit var toolbar: MaterialToolbar
+    private lateinit var readerFragment: BaseReaderFragment
 
     override val defaultViewModelProviderFactory: ViewModelProvider.Factory
         get() = ReaderViewModel.createFactory(
@@ -43,16 +48,15 @@ open class ReaderActivity : AppCompatActivity() {
             ReaderActivityContract.parseIntent(this)
         )
 
-    private lateinit var binding: ActivityReaderBinding
-    private lateinit var readerFragment: BaseReaderFragment
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         val binding = ActivityReaderBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         this.binding = binding
+
+        toolbar = binding.root.findViewById(R.id.reader_toolbar)
+        setSupportActionBar(toolbar)
 
         val readerFragment = supportFragmentManager.findFragmentByTag(READER_FRAGMENT_TAG)
             ?.let { it as BaseReaderFragment }
@@ -124,18 +128,18 @@ open class ReaderActivity : AppCompatActivity() {
     private fun reconfigureActionBar() {
         val currentFragment = supportFragmentManager.fragments.lastOrNull()
 
-        title = when (currentFragment) {
+        val showHomeAsUp = when (currentFragment) {
+            is OutlineFragment, is DrmManagementFragment -> true
+            else -> false
+        }
+
+        toolbar.title = when (currentFragment) {
             is OutlineFragment -> model.publication.metadata.title
             is DrmManagementFragment -> getString(R.string.title_fragment_drm_management)
             else -> null
         }
 
-        supportActionBar!!.setDisplayHomeAsUpEnabled(
-            when (currentFragment) {
-                is OutlineFragment, is DrmManagementFragment -> true
-                else -> false
-            }
-        )
+        supportActionBar?.setDisplayHomeAsUpEnabled(showHomeAsUp)
     }
 
     private fun handleReaderFragmentEvent(command: ReaderViewModel.ActivityCommand) {

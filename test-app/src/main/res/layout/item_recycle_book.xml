@@ -4,12 +4,15 @@
   available in the top-level LICENSE file of the project.
 -->
 
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/bookshelf_cardView"
     android:layout_width="120dp"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp">
+    android:layout_margin="5dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="2dp"
+    app:strokeWidth="0dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,26 +29,30 @@
                 android:id="@+id/bookshelf_coverImage"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:contentDescription="@string/cover_image" />
+                android:contentDescription="@string/cover_image"
+                android:scaleType="centerCrop" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start|bottom"
-                android:background="@android:drawable/screen_background_dark_transparent"
+                android:background="@drawable/palette"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/bookshelf_titleText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="2"
                     android:padding="16dp"
                     android:textColor="#FFFFFF"
                     android:textSize="12sp" />
+
             </LinearLayout>
 
         </FrameLayout>
 
     </LinearLayout>
 
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>

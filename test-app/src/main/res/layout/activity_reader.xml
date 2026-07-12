@@ -1,6 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/activity_container"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" />
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/reader_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorSurface"
+        android:elevation="4dp"
+        android:title="@string/app_name"
+        app:titleTextColor="?attr/colorOnSurface"
+        app:popupTheme="@style/ThemeOverlay.Material3.Light"
+        app:theme="@style/ThemeOverlay.Material3.Dark.ActionBar" />
+
+    <FrameLayout
+        android:id="@+id/activity_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+</LinearLayout>
